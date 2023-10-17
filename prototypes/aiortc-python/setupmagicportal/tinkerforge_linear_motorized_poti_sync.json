@@ -1,0 +1,169 @@
+[
+    {
+        "id": "2814646d55900d61",
+        "type": "tab",
+        "label": "tinkerforge_linear_motorized_poti_sync",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a2abb3937435a545",
+        "type": "mqtt in",
+        "z": "2814646d55900d61",
+        "name": "position_in",
+        "topic": "decryptedFromListener/tinkerforge/callback/motorized_linear_poti_bricklet/DCB/position",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "27b5ef572871621b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 260,
+        "y": 480,
+        "wires": [
+            [
+                "758d1f2bdb3f0f17",
+                "d1bc9d10533537dd"
+            ]
+        ]
+    },
+    {
+        "id": "758d1f2bdb3f0f17",
+        "type": "json",
+        "z": "2814646d55900d61",
+        "name": "make_js_obj",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 470,
+        "y": 480,
+        "wires": [
+            [
+                "7f1db1c4baa98bf0"
+            ]
+        ]
+    },
+    {
+        "id": "d1bc9d10533537dd",
+        "type": "debug",
+        "z": "2814646d55900d61",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "7f1db1c4baa98bf0",
+        "type": "change",
+        "z": "2814646d55900d61",
+        "name": "set_position",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.targetRelay",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "payload.drive_mode",
+                "pt": "msg",
+                "to": "smooth",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload.hold_position",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 750,
+        "y": 480,
+        "wires": [
+            [
+                "23406f48c5ec28ca",
+                "0ef5b0a987f4ec97"
+            ]
+        ]
+    },
+    {
+        "id": "23406f48c5ec28ca",
+        "type": "debug",
+        "z": "2814646d55900d61",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1060,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "0ef5b0a987f4ec97",
+        "type": "mqtt out",
+        "z": "2814646d55900d61",
+        "name": "",
+        "topic": "tinkerforge/request/motorized_linear_poti_bricklet/DCN/set_motor_position",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "27b5ef572871621b",
+        "x": 1260,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "27b5ef572871621b",
+        "type": "mqtt-broker",
+        "name": "localhost",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]

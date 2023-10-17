@@ -1,0 +1,58 @@
+app-id: ch.bfh.ti.applic-tunnel
+runtime: org.freedesktop.Platform
+runtime-version: '21.08'  # do not use newer version, ffmpeg version 5 in 22.08 is not compatible with aiortc at the moment
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
+command: runner.sh
+finish-args:
+  # add network permission to sandbox
+  - --share=network
+build-options:
+  build-args:
+    # allow network access during build process
+    - --share=network
+  append-path:
+    /usr/lib/sdk/rust-stable/bin # export rust complier path
+modules:
+  - name: crc32c
+    buildsystem: cmake-ninja
+    sources:
+      - type: git
+        branch: main
+        url: https://github.com/google/crc32c.git
+  - name: applic-tunnel
+    buildsystem: simple
+    build-commands:
+      # show available versions
+      - rustc --version   # log rust compiler version
+      - cargo --version   # log cargo version
+      - ffmpeg -version   # log ffmpeg version
+      - openssl version   # log open ssl version
+      # install custom scripts
+      - install -D runner.sh /app/bin/runner.sh
+      - install -D applic_tunnel_main.py /app/applic_tunnel_main.py
+      - install -D applic_tunnel.py /app/applic_tunnel.py
+      - install -D mqtt_secure_signaling.py /app/mqtt_secure_signaling.py
+      - install -D applic_tunnel_utilities.py /app/applic_tunnel_utilities.py
+      - install -D signaling_interface.py /app/signaling_interface.py
+    build-options:
+      build-args:
+        # allow network access during build process
+        - --share=network
+    sources:
+      # add local sources
+      - type: file
+        path: runner.sh
+      - type: file
+        path: ../src/applic_tunnel_main.py
+      - type: file
+        path: ../src/applic_tunnel.py
+      - type: file
+        path: ../src/mqtt_secure_signaling.py
+      - type: file
+        path: ../src/applic_tunnel_utilities.py
+      - type: file
+        path: ../signaling_interface.py
+  # add python libraries from automatic generated file
+  - python3-requirements.json

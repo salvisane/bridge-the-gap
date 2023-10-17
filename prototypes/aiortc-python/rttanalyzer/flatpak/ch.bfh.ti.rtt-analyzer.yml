@@ -1,0 +1,31 @@
+app-id: ch.bfh.ti.rtt-analyzer
+runtime: org.freedesktop.Platform
+runtime-version: '22.08'
+sdk: org.freedesktop.Sdk
+command: runner_analyzer.sh
+finish-args:
+  # add network permission to sandbox
+  - --share=network
+build-options:
+  build-args:
+    # allow network access during build process
+    - --share=network
+modules:
+  - name: rtt-analyzer
+    buildsystem: simple
+    build-commands:
+      # install custom scripts
+      - install -D runner_analyzer.sh /app/bin/runner_analyzer.sh
+      - install -D rttAnalyzerClient.py /app/rttAnalyzerClient.py
+    build-options:
+      build-args:
+        # allow network access during build process
+        - --share=network
+    sources:
+      # add local sources
+      - type: file
+        path: runner_analyzer.sh
+      - type: file
+        path: ../src/rttAnalyzerClient.py
+  # add python libraries from automatic generated file
+  - python3-requirements.json

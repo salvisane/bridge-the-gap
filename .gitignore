@@ -1,0 +1,12 @@
+
+prototypes/aiortc-python/.idea/
+
+prototypes/aiortc-python/.flatpak-builder/
+
+prototypes/aiortc-python/applictunnel/flatpak/.flatpak-builder/
+
+prototypes/aiortc-python/securebridge/flatpak/.flatpak-builder/
+
+prototypes/aiortc-python/rttanalyzer/flatpak/.flatpak-builder/
+
+prototypes/aiortc-python/applictunnel/src/__pycache__/

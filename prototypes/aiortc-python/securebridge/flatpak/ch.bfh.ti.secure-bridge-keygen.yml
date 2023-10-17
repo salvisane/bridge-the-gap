@@ -1,0 +1,37 @@
+app-id: ch.bfh.ti.secure-bridge-keygen
+runtime: org.freedesktop.Platform
+runtime-version: '22.08'
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
+command: runner_keygen.sh
+finish-args:
+  # add network permission to sandbox
+  - --share=network
+build-options:
+  build-args:
+    # allow network access during build process
+    - --share=network
+  append-path:
+    /usr/lib/sdk/rust-stable/bin # export rust complier path
+modules:
+  - name: secure-bridge-keygen
+    buildsystem: simple
+    build-commands:
+      # show available versions
+      - openssl version   # log open ssl version
+      # install custom scripts
+      - install -D runner_keygen.sh /app/bin/runner_keygen.sh
+      - install -D symmetric_key_gen.py /app/symmetric_key_gen.py
+    build-options:
+      build-args:
+        # allow network access during build process
+        - --share=network
+    sources:
+      # add local sources
+      - type: file
+        path: runner_keygen.sh
+      - type: file
+        path: ../src/symmetric_key_gen.py
+  # add python libraries from automatic generated file
+  - python3-requirements.json

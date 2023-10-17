@@ -1,0 +1,21 @@
+# Change <user> to user name and Home directory in file
+# Store the shared secret as /home/<user>/.var/app/ch.bfh.ti.secure-bridge/data/shared.key
+# Store file in /lib/systemd/system/
+[Unit]
+Description=Secure bridge decryption client
+After=multi-user.target
+
+[Service]
+User=<user>
+Restart=always
+RestartSec=2s
+
+# Start command
+ExecStart=flatpak run ch.bfh.ti.secure-bridge encrypt 127.0.0.1 1883 --s_topics tinkerforge/# --p_topic encryptedFromInitiator --keyfile /home/<user>/.var/app/ch.bfh.ti.secure-bridge/data/shared.key --notls
+
+# Stop command. Kill all flatpak processes of the specific session. Otherwise zombies can be left over.
+# (Systemd do not monitor control groups of flatpak applications reliable)
+ExecStop=pkill -SIGINT -s $MAINPID
+
+[Install]
+WantedBy=multi-user.target

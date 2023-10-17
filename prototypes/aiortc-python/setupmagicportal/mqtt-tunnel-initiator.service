@@ -1,0 +1,21 @@
+# Change <user> to user name and Home directory in file
+# Store file in /lib/systemd/system/
+[Unit]
+Description=MQTT tunnel client initiator side
+After=multi-user.target
+
+[Service]
+User=<user>
+Type=idle
+Restart=always
+RestartSec=2s
+
+# listener without initiator validation
+ExecStart=flatpak run ch.bfh.ti.applic-tunnel initiator broker.hivemq.com 1883 "" 1884 <publickey> -t mqttsignaling -n conn1 --notls
+
+# Stop command. Kill all flatpak processes of the specific session. Otherwise zombies can be left over.
+# (Systemd do not monitor control groups of flatpak applications reliable)
+ExecStop=pkill -SIGINT -s $MAINPID
+
+[Install]
+WantedBy=multi-user.target

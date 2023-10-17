@@ -1,0 +1,40 @@
+{
+    "name": "python3-requirements",
+    "buildsystem": "simple",
+    "build-commands": [],
+    "modules": [
+        {
+            "name": "python3-certifi",
+            "buildsystem": "simple",
+            "build-commands": [
+                "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"certifi==2022.12.7\" --no-build-isolation"
+            ],
+            "sources": [
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/71/4c/3db2b8021bd6f2f0ceb0e088d6b2d49147671f25832fb17970e9b583d742/certifi-2022.12.7-py3-none-any.whl",
+                    "sha256": "4ad3232f5e926d6718ec31cfc1fcadfde020920e278684144551c91769c7bc18"
+                }
+            ]
+        },
+        {
+            "name": "python3-asyncio_mqtt",
+            "buildsystem": "simple",
+            "build-commands": [
+                "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"asyncio_mqtt==0.16.1\" --no-build-isolation"
+            ],
+            "sources": [
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/28/0f/008e00d479dc7c666e8cef37d8f738e330a525d6f01fcd351d7fce71681b/asyncio_mqtt-0.16.1-py3-none-any.whl",
+                    "sha256": "ef12c1d0250ffd65b70085d66c457128ed6aa98b3d821d2316213fb9d1957d5b"
+                },
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/f8/dd/4b75dcba025f8647bc9862ac17299e0d7d12d3beadbf026d8c8d74215c12/paho-mqtt-1.6.1.tar.gz",
+                    "sha256": "2a8291c81623aec00372b5a85558a372c747cbca8e9934dfe218638b8eefc26f"
+                }
+            ]
+        }
+    ]
+}

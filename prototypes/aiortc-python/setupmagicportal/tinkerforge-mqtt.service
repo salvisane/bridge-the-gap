@@ -1,0 +1,17 @@
+# replace <user> with user name
+# create initfile
+[Unit]
+Description=Service for tinkerforge linear poti MQTT interface
+After=multi-user.target
+
+[Service]
+User=<user>
+Type=idle
+Restart=always
+RestartSec=2s
+
+# start MQTT API with init file
+ExecStart=tinkerforge_mqtt --init-file /home/<user>/.tinkerforge/motorized_poti_mqtt.cfg
+
+[Install]
+WantedBy=multi-user.target

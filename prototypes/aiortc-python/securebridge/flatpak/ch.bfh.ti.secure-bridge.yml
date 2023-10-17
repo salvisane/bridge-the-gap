@@ -1,0 +1,37 @@
+app-id: ch.bfh.ti.secure-bridge
+runtime: org.freedesktop.Platform
+runtime-version: '22.08'
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
+command: runner_bridge.sh
+finish-args:
+  # add network permission to sandbox
+  - --share=network
+build-options:
+  build-args:
+    # allow network access during build process
+    - --share=network
+  append-path:
+    /usr/lib/sdk/rust-stable/bin # export rust complier path
+modules:
+  - name: secure-bridge
+    buildsystem: simple
+    build-commands:
+      # show available versions
+      - openssl version   # log open ssl version
+      # install custom scripts
+      - install -D runner_bridge.sh /app/bin/runner_bridge.sh
+      - install -D securebridge.py /app/securebridge.py
+    build-options:
+      build-args:
+        # allow network access during build process
+        - --share=network
+    sources:
+      # add local sources
+      - type: file
+        path: runner_bridge.sh
+      - type: file
+        path: ../src/securebridge.py
+  # add python libraries from automatic generated file
+  - python3-requirements.json

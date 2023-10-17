@@ -1,0 +1,2 @@
+certifi==2022.12.7
+asyncio_mqtt==0.16.1

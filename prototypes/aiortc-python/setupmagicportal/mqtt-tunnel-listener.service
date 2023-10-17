@@ -1,0 +1,26 @@
+# Create a key pair under /home/<user>/.var/lib/flatpak/app/ch.bfh.ti.applic-tunnel/data/
+# Optionally add all allowed initiators to file /home/<user>/.var/lib/flatpak/app/ch.bfh.ti.applic-tunnel/data/initiators.cfg
+# Change <user> to user name and Home directory in file
+# Store file in /lib/systemd/system/
+[Unit]
+Description=MQTT tunnel client listener side
+After=multi-user.target
+
+[Service]
+User=<user>
+Type=idle
+Restart=always
+RestartSec=2s
+
+# listener without initiator validation
+ExecStart=flatpak run ch.bfh.ti.applic-tunnel listener broker.hivemq.com 1883 127.0.0.1 1883 /home/<user>/.var/app/ch.bfh.ti.applic-tunnel/data/key.private -t mqttsignaling -n conn1 --notls
+
+# Stop command. Kill all flatpak processes of the specific session. Otherwise zombies can be left over.
+# (Systemd do not monitor control groups of flatpak applications reliable)
+ExecStop=pkill -SIGINT -s $MAINPID
+
+# listener with initiator validation
+# ExecStart=flatpak run ch.bfh.ti.applic-tunnel listener broker.hivemq.com 1883 127.0.0.1 1883 /home/<user>/.var/app/ch.bfh.ti.applic-tunnel/data/key.private -t mqttsignaling -n conn1 --notls -i /home/<user>/.var/lib/flatpak/app/ch.bfh.ti.applic-tunnel/data/initiators.cfg
+
+[Install]
+WantedBy=multi-user.target
