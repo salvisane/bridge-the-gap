@@ -11,7 +11,7 @@ In the booming age of IoT and Industry 4.x, the questions of what data to share 
 A [page](/doc/book/bridge-the-gap_book.pdf) for the "book" with all thesis of this semester.
 
 ### thesis
-[The thesis documentation.](/doc/thesis/thesis_salvm4-meyer5.pdf))
+The thesis [documentation](/doc/thesis/thesis_salvm4-meyer5.pdf).
 
 ### poster
 A [poster](/doc/poster/bridging-the-gap_MarkusSalvisberg&RemoMeyer.pptx) for the final day exhibition.
