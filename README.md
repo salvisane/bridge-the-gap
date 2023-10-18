@@ -8,25 +8,25 @@ In the booming age of IoT and Industry 4.x, the questions of what data to share 
 ## doc
 
 ### book
-A page for the "book" with all thesis of this semester.
+A [page](/doc/book/bridge-the-gap_book.pdf) for the "book" with all thesis of this semester.
 
 ### thesis
-The thesis documentation as latex document.
+[The thesis documentation.](/doc/thesis/thesis_salvm4-meyer5.pdf))
 
 ### poster
-A poster for the final day exhibition.
+A [poster](/doc/poster/bridging-the-gap_MarkusSalvisberg&RemoMeyer.pptx) for the final day exhibition.
 
 ### presentation
-The final day and the defense presentations. 
+The [final day](/doc/presentation/thesis_presentation.pptx) and the [defense](/doc/presentation/thesis_verteidigung.pptx) presentations. 
 
 ### video
-A short video of the thesis.
+A short [video](/doc/video/bridging_the_gap_MarkusSalvisberg&RemoMeyer.mp4) of the thesis.
 
 ### rtt_measurement
-Raw data of the round trip time analysis.
+[Raw data](/doc/rtt_measurement) of the round trip time analysis.
 
 ## prototypes
-All code written during the thesis. It contains an application to tunnel an application layer by WebRTC, a secure bridge application and several configuration files. All applications can be build as a flatpak. 
+All [code](/prototypes/aiortc-python) written during the thesis. It contains an application to tunnel an application layer by WebRTC, a secure bridge application and several configuration files. All applications can be build as a flatpak. 
 
 # Licence
 All code is released under the [BSD 3-Clause License](/LICENSE).
